@@ -3,16 +3,10 @@
   "devCommand": "pnpm run dev",
   "installCommand": "pnpm install --frozen-lockfile",
   "framework": null,
-  "outputDirectory": "dist",
+  "outputDirectory": ".",
+  "public": false,
   "env": {
     "NODE_ENV": "production"
-  },
-  "functions": {
-    "server/_core/index.ts": {
-      "runtime": "nodejs20.x",
-      "memory": 1024,
-      "maxDuration": 60
-    }
   },
   "routes": [
     {
@@ -21,9 +15,12 @@
       "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS"]
     },
     {
+      "src": "/public/(.*)",
+      "dest": "/public/$1"
+    },
+    {
       "src": "/(.*)",
-      "dest": "dist/index.html",
-      "status": 200
+      "dest": "dist/index.html"
     }
   ]
 }
